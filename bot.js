@@ -1,7 +1,21 @@
-console.log('bleep bloop it's me, Otto Bot');
+console.log('bleep bloop its me, Otto Bot');
 
 var Twit = require('twit');
 
 var config = require('./config');
 var T = new Twit(config);
 
+var params = {
+	q: 'hackisu',
+	count: 5
+}
+
+T.get('search/tweets', params, gotData);
+
+function gotData(err, data, response) {
+	var tweets = data.statuses;
+	for (var i = 0; i < tweets.length; i++) {
+			console.log(tweets[i].text);
+	}
+	
+}

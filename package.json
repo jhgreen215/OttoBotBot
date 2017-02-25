@@ -1,0 +1,30 @@
+{
+  "name": "ottobotbot",
+  "version": "1.0.0",
+  "description": "Getting started with OttoBotBot",
+  "main": "bot.js",
+  "scripts": {
+	"start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhgreen215/OttoBotBot.git"
+  },
+  "keywords": [
+    "otto",
+    "bot",
+    "kure",
+    "885",
+    "ames"
+  ],
+  "author": "Jonny Green",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhgreen215/OttoBotBot/issues"
+  },
+  "homepage": "https://github.com/jhgreen215/OttoBotBot#readme",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}
