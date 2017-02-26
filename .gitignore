@@ -2,4 +2,4 @@ config.txt
 
 log
 
-.env
+*.env
