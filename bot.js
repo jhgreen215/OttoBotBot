@@ -1,21 +1,30 @@
 console.log('bleep bloop its me, Otto Bot');
 
+require('dotenv').config();
+
 var Twit = require('twit');
+
+
 var fetch = require('node-fetch');
-var config = require('./config');
-var T = new Twit(config);
+var T = new Twit({
+    consumer_key: process.env.consumer_key,
+    consumer_secret: process.env.consumer_secret,
+    access_token: process.env.access_token,
+    access_token_secret: process.env.access_token_secret
+
+});
 var lastSong;
 var lastArtist;
 var canTweet = true;
 var KURE_URL = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=kure885&api_key=f0f1bd44b3ed4f4afa54337d5b482e3f&limit=1&format=json';
 
-//var stream = T.stream('user');
+var stream = T.stream('user');
 	
-//stream.on('tweet', tweetEvent);
+stream.on('tweet', tweetEvent);
 
 function tweetEvent(eventMsg) {
 	console.log('Tweet found!');
-	var fs = require('fs');
+	//var fs = require('fs');
 	//var json = JSON.stringify(eventMsg, null, 2);
 	//fs.writeFile("tweet.json", json);
 	var taggedUser = eventMsg.in_reply_to_screen_name;
@@ -26,9 +35,9 @@ function tweetEvent(eventMsg) {
 	
 	if (taggedUser === 'OttoBot93') {
 		var searchText = tweetText.toLowerCase();
-		var test1 = searchText.match(/what'?s?\s*[playing]/);
+		var test1 = searchText.match(/what'?s?\s*[playing|on\-?\s?air]/);
 		var test2 = searchText.match(/[what]*\s*[which]*\s*(song|artist|band)\s*/);
-		console.log(!!test1, !!test2);
+
 		if(!!test1 || !!test2){
 			composeInfoTweet(user);
 		}
@@ -87,10 +96,12 @@ function tweeted(err, data, response) {
 			}
 }
 
+
+
 function test() {
 	var user = 'ronnygreen215';
 	var taggedUser = 'OttoBot93';
-	var tweetText = 'hey otto what\'s playing on air right now?';
+	var tweetText = 'hey otto what songs?';
 	
 	if (taggedUser === 'OttoBot93') {
 		var searchText = tweetText.toLowerCase();
@@ -103,4 +114,3 @@ function test() {
 		}
 	}
 }
-test();
